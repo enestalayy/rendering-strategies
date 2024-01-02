@@ -6,6 +6,6 @@ export default defineNuxtConfig({
     payloadExtraction: true,
   },
   routeRules: {
-    "/isr": { isr: 20 },
+    "/isr": { isr: 60 },
   },
 });
