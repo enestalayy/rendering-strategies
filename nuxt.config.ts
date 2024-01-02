@@ -2,6 +2,9 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["@nuxtjs/tailwindcss", "nuxt-primevue"],
+  experimental: {
+    payloadExtraction: true,
+  },
   routeRules: {
     "/isr": { isr: 20 },
   },

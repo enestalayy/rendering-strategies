@@ -8,7 +8,14 @@
 </template>
 
 <script setup>
-    const {data: posts, pending, error, status, execute } = await useFetch('https://jsonplaceholder.typicode.com/posts')
+    const nuxtApp = useNuxtApp()
+    const {data: posts, pending, error, status, execute } = await useFetch('https://api.vercel.app/blog', {
+        key: 'photos',
+        lazy: true,
+        getCachedData(key) {
+            return nuxtApp.payload.data[key] || nuxtApp.static.data[key]
+        }
+    })
 </script>
 
 <style lang="scss" scoped>
