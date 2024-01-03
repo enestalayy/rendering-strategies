@@ -9,7 +9,7 @@
 
 <script setup>
     const nuxtApp = useNuxtApp()
-    const {data: posts, pending, error, status, execute } = await useFetch('https://api.vercel.app/blog', {
+    const {data: posts, pending, error, status, execute } = await useFetch('https://jsonplaceholder.typicode.com/posts', {
         key: 'photos',
         lazy: true,
         getCachedData(key) {
