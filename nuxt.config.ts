@@ -5,7 +5,20 @@ export default defineNuxtConfig({
   experimental: {
     payloadExtraction: true,
   },
+  generate: {
+    routes: ['/ssg']
+  },
   routeRules: {
     "/isr": { isr: 60 },
+  },
+  primevue: {
+    cssLayerOrder: "tailwind-base, primevue, tailwind-utilities",
+    options: {
+      ripple: true,
+    },
+    components: {
+      prefix: "Prime",
+      include: "*",
+    },
   },
 });
