@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     routes: ["/ssg"],
   },
   routeRules: {
-    "/isr": { isr: 60 },
+    "/isr": { isr:  86400 },
     "/ssg": { prerender: true },
     "/csr": { ssr: false },
   },

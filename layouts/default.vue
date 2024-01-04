@@ -1,5 +1,5 @@
 <template>
-    <div class="w-[100vw] min-h-[100vh]">
+    <div class="w-[100vw] min-h-[100vh] bg-[#010e29]">
         <header class="w-full mb-3">
             <NavBar />
         </header>
