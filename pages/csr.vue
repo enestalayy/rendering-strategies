@@ -1,6 +1,7 @@
 <template>
   <div class="flex flex-col items-center justify-center text-white">
     <div class="flex-auto">
+      {{ albumId }}
       <label for="minmax-buttons" class="font-bold block mb-1 ">
         Select an Album up to 100
       </label>
@@ -38,33 +39,44 @@
 <script setup>
 const albumId = ref(1);
 const nuxtApp = useNuxtApp();
-const { data: album, pending, error, status, refresh } = await useFetch(
-  'https://jsonplaceholder.typicode.com/photos',
-  {
-    key: `album-${albumId.value}`,
-    lazy: true,
-    immediate: true,
-    server: false,
-    query: {
-      albumId
-    },
-    dedupe: 'defer',
-    watch: [albumId],
-    getCachedData(key) {
-      return nuxtApp.payload.data[key] || null;
-    },
+
+const { data: album, pending, error, status, refresh } = useAsyncData(`album:${albumId.value}`, async () => {
+  try {
+    const result = await $fetch('https://jsonplaceholder.typicode.com/photos', {
+      params: {
+        albumId: albumId.value
+      },
+      dedupe: 'defer',
+    });
+    return result;
+  } catch (e) {
+    console.error('Fetch error:', e);
+    throw e;
+  }
+}, {
+  lazy: true,
+  immediate: true,
+  server: false,
+  watch: [albumId],
+  getCachedData(key) {
+    return nuxtApp.payload.data[key] || null;
   },
-  
-); 
+});
+
+
+
+
+album && console.log(album)
+
 watch(albumId, () => {
   // console.log(useNuxtData(`album-${albumId.value}`))
-  const { data } = useNuxtData(`album-${albumId.value}`)
+  const { data } = useNuxtData()
   console.log(data)
   // console.log(`useNuxtData: ${useNuxtData(`album-${albumId.value}`)}`);
   // console.log(`Payload Data: ${nuxtApp.payload.data[`album-${albumId.value}`]}`);
   // console.log(`Static Data: ${nuxtApp.static.data[`album-${albumId.value}`]}`);
 
-   refreshNuxtData(`album-${albumId.value}`)
+  //  refreshNuxtData(`album-${albumId.value}`)
 
 });
 const responsiveOptions = ref([
