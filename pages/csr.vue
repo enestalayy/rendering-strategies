@@ -11,7 +11,7 @@
         mode="decimal"
         showButtons
         class="text-red-600 mb-3"
-        :min="0"
+        :min="1"
         :max="100"
       />
     </div>
@@ -38,47 +38,28 @@
 
 <script setup>
 const albumId = ref(1);
-const nuxtApp = useNuxtApp();
+const nuxtApp = useNuxtApp()
+  const { data: album } = await useLazyFetch(`https://jsonplaceholder.typicode.com/photos`, {
+    key: 'album',
+    server: false,
+    query: {
+      albumId
+    },
+    onRequest() {
+      const cachedAlbum = nuxtApp.payload.data[`album-${albumId.value}`] || nuxtApp.static.data[`album-${albumId.value}`];
+      if (cachedAlbum) {
+        return Promise.resolve({ useCache: true, data: cachedAlbum });
+      }
+      return Promise.resolve({ useCache: false });
+    },
+    onResponse({ response }) {
+      localStorage.setItem('token', response._data.token)
+      const { data:albums } = useNuxtData(`album-${albumId.value}`)
+      !albums.value && (albums.value = response._data)
+      console.log(useNuxtData())
+    },
+  })
 
-const { data: album, pending, error, status, refresh } = useAsyncData(`album:${albumId.value}`, async () => {
-  try {
-    const result = await $fetch('https://jsonplaceholder.typicode.com/photos', {
-      params: {
-        albumId: albumId.value
-      },
-      dedupe: 'defer',
-    });
-    return result;
-  } catch (e) {
-    console.error('Fetch error:', e);
-    throw e;
-  }
-}, {
-  lazy: true,
-  immediate: true,
-  server: false,
-  watch: [albumId],
-  getCachedData(key) {
-    return nuxtApp.payload.data[key] || null;
-  },
-});
-
-
-
-
-album && console.log(album)
-
-watch(albumId, () => {
-  // console.log(useNuxtData(`album-${albumId.value}`))
-  const { data } = useNuxtData()
-  console.log(data)
-  // console.log(`useNuxtData: ${useNuxtData(`album-${albumId.value}`)}`);
-  // console.log(`Payload Data: ${nuxtApp.payload.data[`album-${albumId.value}`]}`);
-  // console.log(`Static Data: ${nuxtApp.static.data[`album-${albumId.value}`]}`);
-
-  //  refreshNuxtData(`album-${albumId.value}`)
-
-});
 const responsiveOptions = ref([
     {
         breakpoint: '1300px',
