@@ -40,8 +40,8 @@
 </template>
 
 <script setup>
-const albumId = ref(1);
-const nuxtApp = useNuxtApp()
+  const albumId = ref(1);
+  const nuxtApp = useNuxtApp()
   const { data: album, pending, error } = await useLazyFetch(`https://jsonplaceholder.typicode.com/photos`, {
     key: 'album',
     server: false,
@@ -56,23 +56,24 @@ const nuxtApp = useNuxtApp()
       return Promise.resolve({ useCache: false });
     },
     onResponse({ response }) {
-      localStorage.setItem('token', response._data.token)
       const { data:albums } = useNuxtData(`album-${albumId.value}`)
       !albums.value && (albums.value = response._data)
       console.log(useNuxtData())
     },
   })
-
-const responsiveOptions = ref([
-    {
-        breakpoint: '1300px',
-        numVisible: 4
-    },
-    {
-        breakpoint: '575px',
-        numVisible: 1
-    }
-]);
+  watch((albumId) => {
+    console.log(useNuxtData());
+  });
+  const responsiveOptions = ref([
+      {
+          breakpoint: '1300px',
+          numVisible: 4
+      },
+      {
+          breakpoint: '575px',
+          numVisible: 1
+      }
+  ]);
 </script>
 
 <style>
