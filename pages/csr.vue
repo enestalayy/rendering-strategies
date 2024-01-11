@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col items-center justify-center text-white">
+    <h1 class="text-4xl my-2">Client Side Rendering</h1>
     <div class="flex-auto">
-      {{ albumId }}
       <label for="minmax-buttons" class="font-bold block mb-1 ">
         Select an Album up to 100
       </label>
@@ -15,7 +15,10 @@
         :max="100"
       />
     </div>
+    <h3 v-if="pending">Loading...</h3>
+    <h3 v-else-if="error">error</h3>
     <PrimeGalleria
+        v-else
         :value="album"
         :responsiveOptions="responsiveOptions"
         :numVisible="4"
@@ -39,7 +42,7 @@
 <script setup>
 const albumId = ref(1);
 const nuxtApp = useNuxtApp()
-  const { data: album } = await useLazyFetch(`https://jsonplaceholder.typicode.com/photos`, {
+  const { data: album, pending, error } = await useLazyFetch(`https://jsonplaceholder.typicode.com/photos`, {
     key: 'album',
     server: false,
     query: {

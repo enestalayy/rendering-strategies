@@ -1,10 +1,13 @@
 <template>
-    <ul>
+    <div class="w-full text-center">
+        <h1 class="text-4xl my-2">Incremental Static Regeneration</h1>
+        <ul class="w-1/2 ml-10 flex flex-col items-start">
         <h3 v-if="error">{{ error }}</h3>
-        <li v-for="item in posts" :key="item.id">
+        <li v-for="item in posts" :key="item.id" class="whitespace-nowrap">
             {{ item.id }} {{ item.title }}
         </li>
     </ul>
+    </div>
 </template>
 
 <script setup>

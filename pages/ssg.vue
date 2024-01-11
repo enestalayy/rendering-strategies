@@ -1,5 +1,6 @@
 <template>
     <div class="flex flex-col items-center justify-center gap-2">
+        <h1 class="text-4xl my-2">Static Side Generation</h1>
         <div class="flex flex-row items-center gap-2">
             <PrimeAvatar :image="photo.url" size="xlarge" shape="circle" />
             <h3>Name: {{ user.name }}</h3>

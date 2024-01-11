@@ -18,5 +18,6 @@
 <style>
 * {
     box-sizing: border-box;
+    color: beige;
 }
 </style>
