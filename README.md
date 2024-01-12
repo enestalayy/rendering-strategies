@@ -1,75 +1,65 @@
-# Nuxt 3 Minimal Starter
+# Nuxt 3 Rendering Strategies
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+This project is an implementation of the concepts discussed in my Medium article titled [Rendering Strategies With Nuxt 3](https://medium.com/@enestalayy/rendering-strategies-with-nuxt-3-a4b29c5ba7c9).
 
-## Setup
+## Live Demo
 
-Make sure to install the dependencies:
+Check out the live demo: [Rendering Strategies Nuxt 3 Live Demo](https://rendering-strategies-nuxt.vercel.app/)
 
-```bash
-# npm
-npm install
+## Project Overview
 
-# pnpm
-pnpm install
+In this project, I've focused on applying various rendering strategies of Nuxt 3, as outlined in the Medium article:
 
-# yarn
-yarn install
+- Universal Rendering
+- Server-Side Rendering (SSR)
+- Client-Side Rendering (CSR)
+- Static Site Generation (SSG)
+- Incremental Static Regeneration (ISR)
+- Hybrid Rendering
 
-# bun
-bun install
-```
+Each rendering strategy's advantages, disadvantages, and use cases are explained in detail.
 
-## Development Server
+## Project Contents
 
-Start the development server on `http://localhost:3000`:
+The project content delves into the following topics:
 
-```bash
-# npm
-npm run dev
+- The hydration process and advantages for Universal Rendering
+- Advantages and disadvantages of Server-Side Rendering (SSR) and Client-Side Rendering (CSR) methods
+- Flexibility and performance gains with Hybrid Rendering
+- Use cases and advantages of Static Site Generation (SSG) and Incremental Static Regeneration (ISR) techniques
 
-# pnpm
-pnpm run dev
+## Getting Started
 
-# yarn
-yarn dev
+1. Clone the project repository:
 
-# bun
-bun run dev
-```
+    ```bash
+    git clone https://github.com/enestalay/nuxt-rendering-strategies.git
+    cd nuxt-rendering-strategies
+    ```
 
-## Production
+2. Install the necessary dependencies:
 
-Build the application for production:
+    ```bash
+    npm install
+    ```
 
-```bash
-# npm
-npm run build
+3. Start the project:
 
-# pnpm
-pnpm run build
+    ```bash
+    npm run dev
+    ```
 
-# yarn
-yarn build
+4. Open your browser and navigate to [http://localhost:3000](http://localhost:3000) to observe the project.
 
-# bun
-bun run build
-```
+## Routing Customizations
 
-Locally preview production build:
+Within the project, examples of using `routeRules` in the `nuxt.config.js` file to customize rendering strategies for specific pages are provided.
 
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+```javascript
+//nuxt.config.js
+export default defineNuxtConfig({
+    routeRules: {
+      "/csr": { ssr: false },
+      // Other examples...
+    },
+})
