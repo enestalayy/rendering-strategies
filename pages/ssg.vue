@@ -21,15 +21,13 @@
 </template>
 
 <script setup>
-    const {data, error } = await useFetch('https://jsonplaceholder.typicode.com/users', {
+    const {data: users, error } = await useFetch('https://jsonplaceholder.typicode.com/users', {
         key: 'users',
-        pick: ['name', 'email', 'address', 'phone', 'website'],
         transform: (users) => {
             return users.map(user => ({ name: user.name, email: user.email, address: user.address, phone: user.phone, website: user.website }))
         }
-
-
     })
+    console.log(users)
     const {data: photo} = await useFetch('https://jsonplaceholder.typicode.com/photos/1', {
         key: 'photo',
         pick: ['url'],
