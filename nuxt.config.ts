@@ -1,7 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ["@nuxtjs/tailwindcss", "nuxt-primevue"],
+  modules: [
+    "@nuxtjs/tailwindcss",
+    "nuxt-primevue",
+    ["@pinia/nuxt", { autoImports: ["defineStore", "acceptHMRUpdate"] }],
+  ],
   experimental: {
     payloadExtraction: true,
   },
@@ -9,7 +13,7 @@ export default defineNuxtConfig({
     routes: ["/ssg"],
   },
   routeRules: {
-    "/isr": { isr:  30, prerender: true, cors: true },
+    "/isr": { isr: 30, prerender: true, cors: true },
     "/ssg": { prerender: true },
     "/csr": { ssr: false },
   },

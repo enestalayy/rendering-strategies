@@ -1,9 +1,7 @@
 <script setup>
-const getCurrencies = async () => {
-  const {data:currencies} = await useFetch('https://rendering-strategies-nuxt.vercel.app/isr/_payload.json') 
-  console.log(currencies.value[4])
-}
-getCurrencies()
+const currencyStore = useCurrencyStore()
+const { currencies } = storeToRefs(currencyStore)
+
 
 const fetchCurrency = async () => {
       const { data } = await useFetch('https://rendering-strategies-nuxt.vercel.app/isr')
