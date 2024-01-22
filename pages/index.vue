@@ -13,9 +13,9 @@ const fetchCurrency = async () => {
 <template>
   <div class="flex flex-col items-center justify-center">
     <button @click="fetchCurrency()">GET ISR</button>
-    <div v-for="item in currencies" :key="item.id">
-      {{ console.log(item) }}
-    </div>
+    <ul v-for="(item, index) in currencies" :key="index">
+        <li >{{item.code}}: {{item.value.toFixed(4) + item.symbol}}</li>
+      </ul>
 
     <h1 class="text-xl my-5 w-4/5 text-center">
       This website is built with its own rendering method for each page in terms of rendering strategies. You can explore my Medium article related to this topic for further insights.
