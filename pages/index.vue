@@ -15,7 +15,8 @@ const fetchCurrency = async () => {
 
 <template>
   <div class="flex flex-col items-center justify-center">
-  <embed src="https://rendering-strategies-nuxt.vercel.app/isr" width="500" height="300">
+  <embed src="https://rendering-strategies-nuxt.vercel.app/isr" width="500" height="auto">
+  <!-- <embed src="http://localhost:3000/isr" width="500" height="auto"> -->
 
     <button @click="fetchCurrency()">GET ISR</button>
     <ul v-for="(item, index) in currencies" :key="index">
