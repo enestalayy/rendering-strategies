@@ -8,11 +8,7 @@ getCurrencies()
 const fetchCurrency = async () => {
       const { data } = await useFetch('https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_aLMUoTZWNnO5kLl8CZSXn05r7FryPeVwlohM0I9Q&currencies=EUR%2CUSD%2CGBP%2CTRY&base_currency=TRY')
       console.log(data.value.data)
-      if (data && data.value) {
-        currencies.value.forEach(currency => {
-          currency.value = 1 / data.value.data[currency.code]
-        })
-      }
+
     }
     
 
