@@ -2,23 +2,31 @@
 const currencyStore = useCurrencyStore()
 const { currencies } = storeToRefs(currencyStore)
 watch(currencies, () => console.log('currencies değişti'))
-
-
-
-const fetchCurrency = async () => {
-  const { data } = await useFetch('https://rendering-strategies-nuxt.vercel.app/isr')
-  console.log('get isteği çelıştı')
-}
-
-
+const fetchEmbeddedContent = async () => {
+    try {
+        const response = await fetch('https://rendering-strategies-nuxt.vercel.app/isr');
+        const htmlContent = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlContent, 'text/html');
+        const liElements = doc.querySelectorAll('ul li');
+        const liContents = Array.from(liElements).map(li => li.textContent.trim());
+        currencies.value.forEach((currency, index) => {
+            const currencyValue = parseFloat(liContents[index].split(':')[1]);
+            currency.value = isNaN(currencyValue) ? 0 : currencyValue;
+        });
+    } catch (error) {
+        console.error('Hata:', error);
+    }
+};
+fetchEmbeddedContent();
 </script>
 
 <template>
   <div class="flex flex-col items-center justify-center">
-  <embed src="https://rendering-strategies-nuxt.vercel.app/isr" width="500" height="auto">
+  <embed src="https://rendering-strategies-nuxt.vercel.app/isr" width="0" height="0">
   <!-- <embed src="http://localhost:3000/isr" width="500" height="auto"> -->
-
-    <button @click="fetchCurrency()">GET ISR</button>
+    <div>
+  </div>
     <ul v-for="(item, index) in currencies" :key="index">
         <li >{{item.code}}: {{item.value.toFixed(4) + item.symbol}}</li>
       </ul>
@@ -30,17 +38,6 @@ const fetchCurrency = async () => {
   </div>
 </template>
 
-<script>
-export default {
-  mounted() {
-    const script = document.createElement("script");
-    script.src = "https://widgets.sociablekit.com/medium-post/widget.js";
-    script.async = true;
-    script.defer = true;
-    document.head.appendChild(script);
-  },
-};
-</script>
 
 <style>
 pre {
