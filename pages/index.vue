@@ -3,7 +3,7 @@ const currencyStore = useCurrencyStore()
 const { currencies } = storeToRefs(currencyStore)
 const fetchEmbeddedContent = async () => {
     try {
-        const response = await fetch('https://rendering-strategies-nuxt.vercel.app/isr');
+        const response = await fetch('http://localhost:3000/isr');
         const htmlContent = await response.text();
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlContent, 'text/html');
