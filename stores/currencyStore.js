@@ -22,7 +22,7 @@ export const useCurrencyStore = defineStore('currencyStore', {
       this.currencies.forEach(currency => {
         currency.value = 1/data.value.data[currency.code]
       });
-      console.log('data:',data)
+      console.log('store çalıştı')
     },
   },
 })

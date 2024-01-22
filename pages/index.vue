@@ -1,17 +1,22 @@
 <script setup>
 const currencyStore = useCurrencyStore()
 const { currencies } = storeToRefs(currencyStore)
+watch(currencies, () => console.log('currencies değişti'))
+
 
 
 const fetchCurrency = async () => {
-      const { data } = await useFetch('https://rendering-strategies-nuxt.vercel.app/isr')
-      console.log(data)
-    }
-    
+  const { data } = await useFetch('https://rendering-strategies-nuxt.vercel.app/isr')
+  console.log('get isteği çelıştı')
+}
+
+
 </script>
 
 <template>
   <div class="flex flex-col items-center justify-center">
+  <embed src="https://rendering-strategies-nuxt.vercel.app/isr" width="500" height="300">
+
     <button @click="fetchCurrency()">GET ISR</button>
     <ul v-for="(item, index) in currencies" :key="index">
         <li >{{item.code}}: {{item.value.toFixed(4) + item.symbol}}</li>

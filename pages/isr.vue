@@ -10,8 +10,10 @@
 
 const currencyStore = useCurrencyStore()
 const { currencies } = storeToRefs(currencyStore)
+console.log('ISR çalıştı')
 
-currencyStore.fetchCurrency()
+    currencyStore.fetchCurrency();
+
 </script>
 
 <template>
