@@ -1,7 +1,6 @@
 <script setup>
 const currencyStore = useCurrencyStore()
 const { currencies } = storeToRefs(currencyStore)
-watch(currencies, () => console.log('currencies değişti'))
 const fetchEmbeddedContent = async () => {
     try {
         const response = await fetch('https://rendering-strategies-nuxt.vercel.app/isr');
@@ -24,7 +23,6 @@ fetchEmbeddedContent();
 <template>
   <div class="flex flex-col items-center justify-center">
   <embed src="https://rendering-strategies-nuxt.vercel.app/isr" width="0" height="0">
-  <!-- <embed src="http://localhost:3000/isr" width="500" height="auto"> -->
     <div>
   </div>
     <ul v-for="(item, index) in currencies" :key="index">
