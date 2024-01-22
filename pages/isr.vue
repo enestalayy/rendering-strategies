@@ -9,7 +9,7 @@ const currencies = ref([
     { name: '£ GBP', code: 'GBP', symbol: '£', value: 0 },
 ])
 const fetchCurrencies = async () => {
-    await useFetch('https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_JarnIfUap3XwqgJiUpO961NLR4ZrpNZiIWUCDfdj&currencies=EUR%2CUSD%2CGBP%2CTRY&base_currency=TRY', {
+    const {data} = await useFetch('https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_JarnIfUap3XwqgJiUpO961NLR4ZrpNZiIWUCDfdj&currencies=EUR%2CUSD%2CGBP%2CTRY&base_currency=TRY', {
 key: 'currencies'
 })
 
