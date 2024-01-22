@@ -6,12 +6,10 @@ const getCurrencies = async () => {
 getCurrencies()
 
 const fetchCurrency = async () => {
-      const { data } = await useFetch('https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_aLMUoTZWNnO5kLl8CZSXn05r7FryPeVwlohM0I9Q&currencies=EUR%2CUSD%2CGBP%2CTRY&base_currency=TRY')
-      console.log(data.value.data)
-
+      const { data } = await useFetch('https://rendering-strategies-nuxt.vercel.app/isr')
+      console.log(data)
     }
     
-
 </script>
 
 <template>
