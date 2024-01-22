@@ -1,5 +1,30 @@
+<script setup>
+const getCurrencies = async () => {
+  const {data:currencies} = await useFetch('https://rendering-strategies-nuxt.vercel.app/isr/_payload.json') 
+  console.log(currencies.value[4])
+}
+getCurrencies()
+
+const fetchCurrency = async () => {
+      const { data } = await useFetch('https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_aLMUoTZWNnO5kLl8CZSXn05r7FryPeVwlohM0I9Q&currencies=EUR%2CUSD%2CGBP%2CTRY&base_currency=TRY')
+      console.log(data.value.data)
+      if (data && data.value) {
+        currencies.value.forEach(currency => {
+          currency.value = 1 / data.value.data[currency.code]
+        })
+      }
+    }
+    
+
+</script>
+
 <template>
   <div class="flex flex-col items-center justify-center">
+    <button @click="fetchCurrency()">GET ISR</button>
+    <div v-for="item in currencies" :key="item.id">
+      {{ console.log(item) }}
+    </div>
+
     <h1 class="text-xl my-5 w-4/5 text-center">
       This website is built with its own rendering method for each page in terms of rendering strategies. You can explore my Medium article related to this topic for further insights.
     </h1>
