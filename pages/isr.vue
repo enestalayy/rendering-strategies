@@ -1,27 +1,26 @@
 <script setup>
-    const nuxtApp = useNuxtApp()
-
 definePageMeta({
     layout: 'currency'
 })
 const currencies = ref([
-      { name: '₺ TRY', code: 'TRY', symbol: '₺', value: 0 },
-      { name: '$ USD', code: 'USD', symbol: '$', value: 0 },
-      { name: '€ Euro', code: 'EUR', symbol: '€', value: 0 },
-      { name: '£ GBP', code: 'GBP', symbol: '£', value: 0 },
-    ])
+    { name: '₺ TRY', code: 'TRY', symbol: '₺', value: 0 },
+    { name: '$ USD', code: 'USD', symbol: '$', value: 0 },
+    { name: '€ Euro', code: 'EUR', symbol: '€', value: 0 },
+    { name: '£ GBP', code: 'GBP', symbol: '£', value: 0 },
+])
+const fetchCurrencies = async () => {
+    await useFetch('https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_JarnIfUap3XwqgJiUpO961NLR4ZrpNZiIWUCDfdj&currencies=EUR%2CUSD%2CGBP%2CTRY&base_currency=TRY', {
+key: 'currencies'
+})
 
-    const { data, error} = await useFetch('https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_aLMUoTZWNnO5kLl8CZSXn05r7FryPeVwlohM0I9Q&currencies=EUR%2CUSD%2CGBP%2CTRY&base_currency=TRY', {
-    key: 'currencies'
-    })
-    if (data) {
-        currencies.value.forEach(currency => {
-            currency.value = 1 / data.value.data[currency.code];
-        });
-        console.log('fetch çalıştı');
-    } else {
-        console.error('Hata:', error);
-    }
+    currencies.value.forEach(currency => {
+        currency.value = 1 / data.value.data[currency.code];
+    });
+    console.log('fetch çalıştı');
+} 
+onMounted(() => {
+    fetchCurrencies()
+})
 </script>
 
 <template>
