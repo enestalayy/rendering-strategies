@@ -22,7 +22,7 @@ fetchEmbeddedContent();
 
 <template>
   <div class="flex flex-col items-center justify-center">
-  <embed src="https://rendering-strategies-nuxt.vercel.app/isr" width="0" height="0">
+  <!-- <embed src="https://rendering-strategies-nuxt.vercel.app/isr" width="0" height="0"> -->
     <div>
   </div>
     <ul v-for="(item, index) in currencies" :key="index">
