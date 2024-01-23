@@ -30,7 +30,7 @@ const currencies = {
 </script>
 
 <template>
-    {{ JSON.stringify(currencies) }}
+    <pre>{{ JSON.stringify(currencies, null, 2) }}</pre>
 </template>
 
 
