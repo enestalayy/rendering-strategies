@@ -12,11 +12,10 @@ const { data, error} = await useFetch('http://api.freecurrencyapi.com/v1/latest?
     key: 'currencies'
     })
     if (data) {
-        currencies.currencies.forEach(currency => {
+        currencies.forEach(currency => {
             console.log(data.value.data[currency.code])
             currency.value = 1 / data.value.data[currency.code];
         });
-        console.log(currencies.currencies);
     } else {
         console.error('Hata:', error);
     }
