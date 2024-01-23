@@ -8,7 +8,7 @@ const currencies = [
     { code: 'EUR', value: null },
     { code: 'GBP', value: null },
 ]
-const { data, error} = await useFetch('http://api.freecurrencyapi.com/v1/latest?apikey=fca_live_JarnIfUap3XwqgJiUpO961NLR4ZrpNZiIWUCDfdj&currencies=EUR%2CUSD%2CGBP%2CTRY&base_currency=TRY', {
+const { data, error} = await useFetch('', {
     key: 'currencies'
     })
     if (data) {
