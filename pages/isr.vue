@@ -25,11 +25,12 @@ const { data, error} = await useFetch('http://api.freecurrencyapi.com/v1/latest?
 </script>
 
 <template>
-    <div class="w-full text-center flex flex-row justify-between">
-    <ul v-for="(item, index) in currencies" :key="index">
-        <li >{{item.code}}: {{item.value + item.symbol}}</li>
-      </ul>
+    <div>
+    {{ currencies }}
     </div>
 </template>
-
+<style>
+div {
+    color: black;
+}</style>
 
